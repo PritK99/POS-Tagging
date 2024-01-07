@@ -26,6 +26,7 @@ int main()
     words = preprocess(words, dataset);
 
     initialization(words, dataset);
+    forward_pass(dataset);
     
     return 0;
 }

@@ -16,7 +16,7 @@
 using namespace std;
 
 void initialization(vector <string> words, Dataset &dataset);
-// void forward_pass();
+void forward_pass(Dataset &dataset);
 // vector <string> backward_pass();
 
 #endif

@@ -32,12 +32,18 @@ void initialization(vector <string> words, Dataset &dataset)
 
     dataset.dp.resize(dataset.tag_to_idx.size(), vector<int>(dataset.word_to_idx.size(), 0));
     dataset.tags.resize(dataset.tag_to_idx.size(), vector<int>(dataset.word_to_idx.size(), 0));
+
+    for (int i = 0; i < dataset.tag_to_idx.size(); i++)
+    {
+        dataset.dp[0][i] = dataset.prior_probs[dataset.idx_to_tag[i]];
+        dataset.tags[0][i] = 0;
+    }
 }
 
-// void forward_pass()
-// {
+void forward_pass(Dataset &dataset)
+{
 
-// }
+}
 
 // vector <string> backward_pass()
 // {
