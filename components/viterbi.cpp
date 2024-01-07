@@ -63,7 +63,32 @@ void forward_pass(Dataset &dataset)
     }
 }
 
-// vector <string> backward_pass()
-// {
+vector <string> backward_pass(Dataset dataset)
+{
+    vector <string> answer;
+    double max = numeric_limits<double>::lowest();
+    int max_idx = 0;
+    for (int i = 0; i < dataset.tags.size(); i++)
+    {
+        if (dataset.dp[i][dataset.tags[0].size()-1] > max)
+        {
+            max = dataset.dp[i][dataset.tags[0].size()-1];
+            max_idx = i;
+        }
+    }
 
-// }
+    answer.push_back(dataset.idx_to_tag[max_idx]);
+    int curr = dataset.dp[max_idx][dataset.tags[0].size()-1];
+
+    for (int i = dataset.tags[0].size()-2; i > 0; i--)
+    {
+        cout << dataset.idx_to_tag[curr];
+        // answer.push_back(dataset.idx_to_tag[curr]);
+        // int next = dataset.tags[curr][i-1];
+        // curr = next;
+    }
+
+    reverse(answer.begin(), answer.end());
+
+    return answer;
+}

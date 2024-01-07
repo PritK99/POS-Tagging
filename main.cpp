@@ -21,12 +21,18 @@ int main()
     dataset.create_dictionary();
     dataset.calculate_probs();
 
-    string s = "I am? a student. Jamun";
+    string s = "I am a student.";
     vector<string> words = tokenize(s);
     words = preprocess(words, dataset);
 
     initialization(words, dataset);
     forward_pass(dataset);
+    vector <string> answer = backward_pass(dataset);
+
+    for (string word : answer)
+    {
+        cout << word << " ";
+    }
     
     return 0;
 }
