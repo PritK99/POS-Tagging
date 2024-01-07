@@ -29,8 +29,10 @@ public:
     unordered_map<string, int> tag_freq;
     unordered_map <pair<string, string>, int, pair_hash> transition_freq;
     unordered_map <pair<string, string>, int, pair_hash> emission_freq;
-    unordered_map <pair<string, string>, int, pair_hash> transition_probs;
-    unordered_map <pair<string, string>, int, pair_hash> emission_probs;
+    unordered_map <string, int> prior_freq;
+    unordered_map <pair<string, string>, double, pair_hash> transition_probs;
+    unordered_map <pair<string, string>, double, pair_hash> emission_probs;
+    unordered_map <string, double> prior_probs;
 
     Dataset()
     {

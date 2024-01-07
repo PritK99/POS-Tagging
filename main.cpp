@@ -13,6 +13,8 @@ int main()
     dataset.calculate_probs();
 
     string s = "I am a student.";
+    vector<string> words;
+    words.push_back("--s--");
 
     return 0;
 }

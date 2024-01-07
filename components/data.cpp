@@ -26,8 +26,10 @@ public:
     unordered_map<string, int> tag_freq;
     unordered_map <pair<string, string>, int, pair_hash> transition_freq;
     unordered_map <pair<string, string>, int, pair_hash> emission_freq;
-    unordered_map <pair<string, string>, int, pair_hash> transition_probs;
-    unordered_map <pair<string, string>, int, pair_hash> emission_probs;
+    unordered_map <string, int> prior_freq;
+    unordered_map <pair<string, string>, double, pair_hash> transition_probs;
+    unordered_map <pair<string, string>, double, pair_hash> emission_probs;
+    unordered_map <string, double> prior_probs;
 
     Dataset()
     {
@@ -116,6 +118,11 @@ void Dataset::create_dictionary()
         transition_freq[make_pair(pairs[i].first, pairs[i+1].first)] += 1;
         emission_freq[pairs[i]] += 1;
         tag_freq[pairs[i].second] += 1;
+
+        if (pairs[i].first == "--s--")
+        {
+            prior_freq[pairs[i+1].first] += 1;
+        }
     }
 }
 
@@ -131,5 +138,10 @@ void Dataset::calculate_probs()
     for (auto p: emission_freq)
     {
         emission_probs[make_pair(p.first.first, p.first.second)] = (p.second + epsilon)/ (tag_freq[p.first.first] + vocab.size()*epsilon);
+    }
+
+    for (auto p: prior_freq)
+    {
+        prior_probs[p.first] = (p.second + epsilon)/ (pairs.size() + POS.size()*epsilon);
     }
 }
