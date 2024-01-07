@@ -4,7 +4,7 @@
 
 Part-Of-Speech (POS) tagging is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to.
 
-<img src = "assets/POS-Tagging.jpg" alt="POS-Tagging">
+<img src = "../assets/POS-Tagging.jpg" alt="POS-Tagging">
 
 POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. They are Ambiguous in nature. Consider the following example:
 
