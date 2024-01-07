@@ -59,6 +59,10 @@ void Dataset::load_dataset()
         cout << "Processing Dataset..." << endl;
         while (getline(dataset, s))
         {
+            for (char &c : s) 
+            {
+                c = tolower(c);
+            }
             pair<string, string> p = process_line(s);
             pairs.push_back(p);
         }
