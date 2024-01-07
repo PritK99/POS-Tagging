@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <utility>
 #include <algorithm>
+#include <limits>
 
 using namespace std;
 
@@ -120,13 +121,15 @@ void Dataset::create_dictionary()
 
 void Dataset::calculate_probs()
 {
+    double epsilon = numeric_limits<double>::epsilon();
+
     for (auto p: transition_freq)
     {
-        transition_probs[make_pair(p[i].first.first, p[i].first.second)] = p[i].second / tag_freq[p[i].first.first];
+        transition_probs[make_pair(p.first.first, p.first.second)] = (p.second + epsilon)/ (tag_freq[p.first.first] + POS.size()*epsilon);
     }
 
-    for (auto p: emmision_freq)
+    for (auto p: emission_freq)
     {
-        emission_probs[make_pair(p[i].first.first, p[i].first.second)] = p[i].second / tag_freq[p[i].first.first];
+        emission_probs[make_pair(p.first.first, p.first.second)] = (p.second + epsilon)/ (tag_freq[p.first.first] + vocab.size()*epsilon);
     }
 }
