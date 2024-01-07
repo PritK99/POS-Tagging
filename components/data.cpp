@@ -25,6 +25,8 @@ public:
     unordered_map<string, int> tag_freq;
     unordered_map <pair<string, string>, int, pair_hash> transition_freq;
     unordered_map <pair<string, string>, int, pair_hash> emission_freq;
+    unordered_map <pair<string, string>, int, pair_hash> transition_probs;
+    unordered_map <pair<string, string>, int, pair_hash> emission_probs;
 
     Dataset()
     {
@@ -37,6 +39,7 @@ public:
     pair<string, string> process_line(string line);
     void create_vocabulary();
     void create_dictionary();
+    void calculate_probs();
 };
 
 void Dataset::load_dataset()
@@ -96,6 +99,10 @@ void Dataset::create_vocabulary()
         vocab.insert(p.first);
         POS.insert(p.second);
     }
+    
+    // adding unknown tag to represent unknown words
+    POS.insert("UNK");
+    vocab.insert("UNK");
 
     cout << "There are " << vocab.size() << " Unique words in dataset" << endl;
     cout << "There are " << POS.size() << " Unique POS tags in dataset" << endl;
@@ -111,13 +118,15 @@ void Dataset::create_dictionary()
     }
 }
 
-// int main()
-// {
-//     string path = "../data/dataset.pos";
-//     Dataset dataset(path);
-//     dataset.load_dataset();
-//     dataset.create_vocabulary();
-//     dataset.create_dictionary();
+void Dataset::calculate_probs()
+{
+    for (auto p: transition_freq)
+    {
+        transition_probs[make_pair(p[i].first.first, p[i].first.second)] = p[i].second / tag_freq[p[i].first.first];
+    }
 
-//     return 0;
-// }
+    for (auto p: emmision_freq)
+    {
+        emission_probs[make_pair(p[i].first.first, p[i].first.second)] = p[i].second / tag_freq[p[i].first.first];
+    }
+}

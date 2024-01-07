@@ -28,6 +28,8 @@ public:
     unordered_map<string, int> tag_freq;
     unordered_map <pair<string, string>, int, pair_hash> transition_freq;
     unordered_map <pair<string, string>, int, pair_hash> emission_freq;
+    unordered_map <pair<string, string>, int, pair_hash> transition_probs;
+    unordered_map <pair<string, string>, int, pair_hash> emission_probs;
 
     Dataset()
     {
@@ -40,5 +42,7 @@ public:
     pair<string, string> process_line(string line);
     void create_vocabulary();
     void create_dictionary();
+    void calculate_probs();
 };
+
 #endif
