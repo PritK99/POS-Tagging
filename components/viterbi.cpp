@@ -30,19 +30,37 @@ void initialization(vector <string> words, Dataset &dataset)
         i++;
     }
 
-    dataset.dp.resize(dataset.tag_to_idx.size(), vector<int>(dataset.word_to_idx.size(), 0));
-    dataset.tags.resize(dataset.tag_to_idx.size(), vector<int>(dataset.word_to_idx.size(), 0));
+    dataset.dp.resize(dataset.tag_to_idx.size(), vector<double>(dataset.word_to_idx.size()));
+    dataset.tags.resize(dataset.tag_to_idx.size(), vector<int>(dataset.word_to_idx.size()));
 
     for (int i = 0; i < dataset.tag_to_idx.size(); i++)
     {
-        dataset.dp[0][i] = dataset.prior_probs[dataset.idx_to_tag[i]];
-        dataset.tags[0][i] = 0;
+        dataset.dp[i][0] = dataset.prior_probs[dataset.idx_to_tag[i]];
+        dataset.tags[i][0] = 0;
     }
 }
 
 void forward_pass(Dataset &dataset)
 {
-
+    for (int i = 1; i < dataset.dp[0].size(); i++)
+    {
+        for (int j = 0; j < dataset.dp.size(); j++)
+        {
+            double max = numeric_limits<double>::lowest();
+            int max_idx = 0;
+            for (int k = 0; k < dataset.dp.size(); k++)
+            {
+                double temp = dataset.dp[k][i-1] + dataset.transition_probs[make_pair(dataset.idx_to_tag[j], dataset.idx_to_tag[k])] + dataset.emission_probs[make_pair(dataset.idx_to_tag[j], dataset.idx_to_word[i])];
+                if (temp > max)
+                {
+                    max = temp;
+                    max_idx = k;
+                }
+            }
+            dataset.dp[j][i] = max;
+            dataset.tags[j][i] = max_idx;
+        }
+    }
 }
 
 // vector <string> backward_pass()
