@@ -9,6 +9,7 @@
 #include <utility>
 #include <algorithm>
 #include <limits>
+#include <math.h>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
     unordered_map <string, int> tag_to_idx;
     unordered_map <int, string> idx_to_word;
     unordered_map <int, string> idx_to_tag;
-    vector<vector<int>> dp;
+    vector<vector<double>> dp;
     vector<vector<int>> tags;
 
     Dataset()

@@ -6,6 +6,7 @@
 #include <utility>
 #include <algorithm>
 #include <limits>
+#include <math.h>
 
 using namespace std;
 
@@ -34,7 +35,7 @@ public:
     unordered_map <string, int> tag_to_idx;
     unordered_map <int, string> idx_to_word;
     unordered_map <int, string> idx_to_tag;
-    vector<vector<int>> dp;
+    vector<vector<double>> dp;
     vector<vector<int>> tags;
 
     Dataset()
@@ -58,7 +59,7 @@ void Dataset::load_dataset()
     string s;
 
     // adding start tag to represent start of text
-    pairs.push_back(make_pair("--s---", "--s--"));
+    pairs.push_back(make_pair("--s--", "--s--"));
 
     if (dataset.is_open())
     {
@@ -87,7 +88,7 @@ pair<string, string> Dataset::process_line(string line)
 {
     if (line.length() == 0)
     {
-        return make_pair("--s---", "--s--");
+        return make_pair("--s--", "--s--");
     }
     string word1, word2;
     int i = 0;
@@ -128,7 +129,6 @@ void Dataset::create_dictionary()
         transition_freq[make_pair(pairs[i].first, pairs[i+1].first)] += 1;
         emission_freq[pairs[i]] += 1;
         tag_freq[pairs[i].second] += 1;
-
         if (pairs[i].first == "--s--")
         {
             prior_freq[pairs[i+1].first] += 1;
@@ -140,18 +140,45 @@ void Dataset::calculate_probs()
 {
     double epsilon = numeric_limits<double>::epsilon();
 
-    for (auto p: transition_freq)
+    for (const auto &tag1 : POS) 
     {
-        transition_probs[make_pair(p.first.first, p.first.second)] = (p.second + epsilon)/ (tag_freq[p.first.first] + POS.size()*epsilon);
+        for (const auto &tag2 : POS)
+        {
+            if (transition_freq.find(make_pair(tag1, tag2)) != transition_freq.end())
+            {
+                transition_probs[make_pair(tag1, tag2)] = log((transition_freq[make_pair(tag1, tag2)] + epsilon)/ (tag_freq[tag1] + vocab.size()*epsilon));
+            }
+            else
+            {
+                transition_probs[make_pair(tag1, tag2)] = log((epsilon)/ (tag_freq[tag1] + vocab.size()*epsilon));
+            }
+        }
     }
 
-    for (auto p: emission_freq)
+    for (const auto &tag : POS) 
     {
-        emission_probs[make_pair(p.first.first, p.first.second)] = (p.second + epsilon)/ (tag_freq[p.first.first] + vocab.size()*epsilon);
+        for (const auto &word : vocab)
+        {
+            if (emission_freq.find(make_pair(tag, word)) != emission_freq.end())
+            {
+                emission_probs[make_pair(tag, word)] = log((emission_freq[make_pair(tag, word)] + epsilon)/ (tag_freq[tag] + vocab.size()*epsilon));
+            }
+            else
+            {
+                emission_probs[make_pair(tag, word)] = log((epsilon)/ (tag_freq[tag] + vocab.size()*epsilon));
+            }
+        }
     }
 
-    for (auto p: prior_freq)
+    for (const auto &tag : POS) 
     {
-        prior_probs[p.first] = (p.second + epsilon)/ (pairs.size() + POS.size()*epsilon);
+        if (prior_freq.find(tag) != prior_freq.end())
+        {
+            prior_probs[tag] = log((prior_freq[tag] + epsilon)/ (pairs.size() + POS.size()*epsilon));
+        }
+        else
+        {
+            prior_probs[tag] = log((epsilon)/ (pairs.size() + POS.size()*epsilon));
+        }
     }
 }
