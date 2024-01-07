@@ -6,9 +6,7 @@ Part-Of-Speech (POS) tagging is the process of assigning a part-of-speech tag (N
 
 <img src = "assets/POS-Tagging.jpg" alt="POS-Tagging">
 
-POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. They are Ambiguous in nature.
-
-Consider the following example:
+POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. They are Ambiguous in nature. Consider the following example:
 
 The whole team played <b>well</b>. ```adverb```
 
