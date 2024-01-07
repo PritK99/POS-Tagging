@@ -8,6 +8,7 @@
 
 #include "components/data.hpp"
 #include "components/tokenize.hpp"
+#include "components/viterbi.hpp"
 
 using namespace std;
 
@@ -24,9 +25,7 @@ int main()
     vector<string> words = tokenize(s);
     words = preprocess(words, dataset);
 
-    for (string word : words)
-    {
-        cout << word << endl;
-    }
+    initialization(words, dataset);
+    
     return 0;
 }
