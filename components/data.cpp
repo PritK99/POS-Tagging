@@ -111,13 +111,13 @@ void Dataset::create_dictionary()
     }
 }
 
-int main()
-{
-    string path = "data/dataset.pos";
-    Dataset dataset(path);
-    dataset.load_dataset();
-    dataset.create_vocabulary();
-    dataset.create_dictionary();
+// int main()
+// {
+//     string path = "../data/dataset.pos";
+//     Dataset dataset(path);
+//     dataset.load_dataset();
+//     dataset.create_vocabulary();
+//     dataset.create_dictionary();
 
-    return 0;
-}
+//     return 0;
+// }
