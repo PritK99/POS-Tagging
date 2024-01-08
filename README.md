@@ -10,8 +10,6 @@
   - [File Structure](#file-structure)
   - [Project Workflow](#project-workflow)
   - [Getting started](#Getting-Started)
-  - [Future Work](#future-work)
-  - [Contributors](#contributors)
   - [Acknowledgements and Resources](#acknowledgements-and-references)
   - [License](#license)
 
@@ -75,7 +73,6 @@ For Documentation, click <a href="/documentation/README.md">here</a> or refer ``
 To download and use this code, the minimum requirements are:
 
 * [g++](https://gcc.gnu.org/onlinedocs/gcc-3.3.6/gcc/G_002b_002b-and-GCC.html): The GNU C++ compiler, available as part of the GNU Compiler Collection (GCC) or Any C++ Compiler
-* [ESP_IDF](https://github.com/espressif/esp-idf)
 * Windows 7 or later (64-bit), Any modern Linux distribution (e.g., Ubuntu, Debian, Fedora, Arch Linux)
 * [Microsoft VS Code](https://code.visualstudio.com/download) or any other IDE 
 
