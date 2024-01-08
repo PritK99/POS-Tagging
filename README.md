@@ -45,25 +45,26 @@ For Documentation, click <a href="/documentation/README.md">here</a> or refer ``
 
 ## File Structure
 ```
-👨‍💻MazeBlaze-v2.1
+👨‍💻POS-Tagging
  ┣ 📂assets                            // Contains all the reference gifs, images
- ┣ 📂documentation
- ┣ 📂firmware                          // Code files 
-   ┣ 📂1_lsa                           // Contains code for getting readings from LSA 
-   ┃ ┣ 📂main                         
-   ┃ ┃ ┗ 📄main.c 
-   ┃ ┃ ┣ 📄CMakeList.txt
-   ┃ ┣ 📄CMakeList.txt
-   ┣ 📂3_encoders                      // Contains code for interfacing encoders 
-   ┣ 📂4_line_following                // Contains code for line following
-   ┣ 📂5_left_follow                   // Contains code for left-follow-rule and path planning
-   ┣ 📂6_boot 
-   ┣ 📂Components                       // Contains all the header and source files used in project
-     ┣ 📂include                       
-     ┣ 📂src 
-     ┣ 📂esp-wifi-logger
-     ┣ 📄CMakeList.txt
-     
+ ┣ 📂components                        // Header Files
+ ┃ ┣ 📄data.cpp
+ ┃ ┣ 📄data.hpp
+ ┃ ┣ 📄tokenize.cpp
+ ┃ ┣ 📄tokenize.hpp
+ ┃ ┣ 📄viterbi.cpp
+ ┃ ┣ 📄viterbi.hpp
+ ┣ 📂data                              // Dataset
+ ┃ ┣ 📄dataset.pos
+ ┃ ┣ 📄sample.pos
+ ┃ ┣ 📄test.pos
+ ┣ 📂documentation                     // Notes & Documentation for project
+ ┃ ┣ 📄notes.pdf
+ ┃ ┣ 📄README.md
+ ┣ 📂Miscellaneous                     // .ipynb implementation
+ ┃ ┣ 📄POS-Tagging-C2_W2_Assignment
+ ┣ 📄main.cpp
+ ┣ 📄README.md
 ``` 
 
 ## Project Workflow
