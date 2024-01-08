@@ -74,8 +74,9 @@ For Documentation, click <a href="/documentation/README.md">here</a> or refer ``
 ### Prerequisites
 To download and use this code, the minimum requirements are:
 
+* [g++](https://gcc.gnu.org/onlinedocs/gcc-3.3.6/gcc/G_002b_002b-and-GCC.html): The GNU C++ compiler, available as part of the GNU Compiler Collection (GCC) or Any C++ Compiler
 * [ESP_IDF](https://github.com/espressif/esp-idf)
-* Windows 7 or later (64-bit), Ubuntu 20.04 or later
+* Windows 7 or later (64-bit), Any modern Linux distribution (e.g., Ubuntu, Debian, Fedora, Arch Linux)
 * [Microsoft VS Code](https://code.visualstudio.com/download) or any other IDE 
 
 ### Installation
@@ -83,7 +84,7 @@ To download and use this code, the minimum requirements are:
 Clone the project by typing the following command in your Terminal/CommandPrompt
 
 ```
-git clone https://github.com/PritK99/MazeBlaze-v2.1.git 
+git clone https://github.com/PritK99/POS-Tagging.git
 ```
 Navigate to the MazeBlaze-v2.1 folder
 
@@ -93,26 +94,29 @@ cd POS-Tagging
 
 ### Usage
 
-Once the requirements are satisfied, you can easily download the project and use it on your machine.
-After following the above steps , use the following command to run the code:
+Once the requirements are satisfied, you can easily build and run the project on your machine.
+Use the following commands to 
+
+* Build the code:
 
 ```
-get_idf
+g++ .\main.cpp .\components\data.cpp .\components\tokenize.cpp .\components\viterbi.cpp
 ```
 
-To build the code 
+* Run the executable 
 
 ```
-idf.py build
+./a.out (For Linux)
 ```
-
-To flash the code
-
+or 
 ```
-idf.py -p (PORT) flash monitor
+./a (For Windows)
 ```
 
 ## Acknowledgements and References
+
+* [Natural Language Processing with Probabilistic Models](https://www.coursera.org/learn/probabilistic-models-in-nlp?specialization=natural-language-processing) by DeepLearning.AI
+* [YouTube video](https://www.youtube.com/watch?v=kqSzLo9fenk) by Serrano.Academy explaining Hidden Markov Model and Viterbi Algorithm
  
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
