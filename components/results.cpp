@@ -7,6 +7,8 @@
 #include <algorithm>
 
 #include "data.hpp"
+#include "tokenize.hpp"
+#include "viterbi.hpp"
 
 using namespace std;
 
@@ -64,14 +66,3 @@ void print_result(vector<string> words, Dataset dataset)
     }
     cout << "/////////////////" << endl;
 }
-
-// void test(string path, Dataset dataset)
-// {
-//     Dataset test_dataset(path);
-//     test_dataset.load_dataset();
-
-//     for (int i = 0; i < test_dataset.pairs.size(); i++)
-//     {
-
-//     }
-// }
