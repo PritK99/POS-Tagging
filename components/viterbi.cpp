@@ -24,16 +24,8 @@ void initialization(vector <string> words, Dataset &dataset)
         i++;
     }
 
-    i = 0;
-    for (auto p: words)
-    {
-        dataset.word_to_idx[p] = i;
-        dataset.idx_to_word[i] = p;
-        i++;
-    }
-
-    dataset.dp.resize(dataset.tag_to_idx.size(), vector<double>(dataset.word_to_idx.size()));
-    dataset.tags.resize(dataset.tag_to_idx.size(), vector<int>(dataset.word_to_idx.size()));
+    dataset.dp.resize(dataset.tag_to_idx.size(), vector<double>(words.size()));
+    dataset.tags.resize(dataset.tag_to_idx.size(), vector<int>(words.size()));
 
     for (int i = 0; i < dataset.POS.size(); i++)
     {
@@ -51,7 +43,7 @@ void initialization(vector <string> words, Dataset &dataset)
     }
 }
 
-void forward_pass(Dataset &dataset)
+void forward_pass(vector <string> words, Dataset &dataset)
 {
     double epsilon = numeric_limits<double>::min();
     
@@ -77,9 +69,9 @@ void forward_pass(Dataset &dataset)
                     curr_transition_prob = log(epsilon);
                 }
 
-                if (dataset.emission_probs.find(make_pair(dataset.idx_to_tag[j], dataset.idx_to_word[i])) != dataset.emission_probs.end())
+                if (dataset.emission_probs.find(make_pair(dataset.idx_to_tag[j], words[i])) != dataset.emission_probs.end())
                 {
-                    curr_emission_prob = dataset.emission_probs[make_pair(dataset.idx_to_tag[j], dataset.idx_to_word[i])];
+                    curr_emission_prob = dataset.emission_probs[make_pair(dataset.idx_to_tag[j], words[i])];
                 }
                 else
                 {

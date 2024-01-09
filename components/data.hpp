@@ -35,9 +35,7 @@ public:
     unordered_map <pair<string, string>, double, pair_hash> transition_probs;
     unordered_map <pair<string, string>, double, pair_hash> emission_probs;
     unordered_map <pair<string, string>, double, pair_hash> prior_probs;
-    unordered_map <string, int> word_to_idx;
     unordered_map <string, int> tag_to_idx;
-    unordered_map <int, string> idx_to_word;
     unordered_map <int, string> idx_to_tag;
     vector<vector<double>> dp;
     vector<vector<int>> tags;
