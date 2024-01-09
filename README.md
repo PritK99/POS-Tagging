@@ -37,6 +37,12 @@ Machine Learning, Natural Language Processing, Dynamic Programming
 
 ## Demo
 
+Click <a href="https://docs.google.com/document/d/1YzoLxt5N7iMxprt9qRRn5fcecOUyPoRU7w22PDSBfLg/edit">here</a> to get detailed description for all Parts-of-Speech Tags.
+
+### Output 1
+
+### Output 2
+
 ## Documentation
 
 For Documentation, click <a href="/documentation/README.md">here</a> or refer ```/documentation/README.md```
