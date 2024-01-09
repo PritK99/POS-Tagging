@@ -18,7 +18,7 @@
 
 <img src = "assets/POS-Tagging.jpg" alt="POS-Tagging">
 
-Part-Of-Speech (POS) tagging is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to. POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. They are Ambiguous in nature. Consider the following example:
+</b>Part-Of-Speech (POS) tagging<b> is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to. POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. they are ambiguous in nature. Consider the following examples:
 
 The whole team played <b>well</b>. ```adverb```
 
@@ -29,6 +29,8 @@ You are doing <b>well</b> for yourself. ```adjective```
 The <b>well</b> is dry. ```noun```
 
 Tears were beginning to <b>well</b> in her eyes. ```verb```
+
+For all these statements, the same word ```well``` assumes different parts of speech. Hence, we use Hidden Markov Model which is a probabilistic model along with Viterbi Algorithm to assign parts of speech tags.
 
 ### Domains Explored
 
