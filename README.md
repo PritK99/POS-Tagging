@@ -5,6 +5,7 @@
 - [Project](#POS-Tagging)
   - [Table of Contents](#table-of-contents)
   - [About The Project](#introduction)
+  - [Results](#results)
   - [Demo](#demo)
   - [Documentation](#documentation)
   - [File Structure](#file-structure)
@@ -15,11 +16,9 @@
 
 ## Introduction
 
-Part-Of-Speech (POS) tagging is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to.
-
 <img src = "assets/POS-Tagging.jpg" alt="POS-Tagging">
 
-POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. They are Ambiguous in nature. Consider the following example:
+Part-Of-Speech (POS) tagging is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to. POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. They are Ambiguous in nature. Consider the following example:
 
 The whole team played <b>well</b>. ```adverb```
 
@@ -35,13 +34,31 @@ Tears were beginning to <b>well</b> in her eyes. ```verb```
 
 Machine Learning, Natural Language Processing, Dynamic Programming
 
-## Demo
+## Results
+
+Accuracy of the POS Tagging Model using Viterbi algorithm is ```0.9531```. The accuracy of the model is determined by comparing it with true labels in ```/data/test.pos```.
 
 Click <a href="https://docs.google.com/document/d/1YzoLxt5N7iMxprt9qRRn5fcecOUyPoRU7w22PDSBfLg/edit">here</a> to get detailed description for all Parts-of-Speech Tags.
 
 ### Output 1
 
+```I have one apple and three oranges```
+
+<img src="/assets/output1.png" alt="/assets/output1">
+
 ### Output 2
+
+```Who is the president of USA?```
+
+<img src="/assets/output2.png" alt="/assets/output2">
+
+### Output 3
+
+```India is my country of residence```
+
+<img src="/assets/output3.png" alt="/assets/output3">
+
+## Demo
 
 ## Documentation
 
@@ -58,6 +75,8 @@ For Documentation, click <a href="/documentation/README.md">here</a> or refer ``
  ┃ ┣ 📄tokenize.hpp
  ┃ ┣ 📄viterbi.cpp
  ┃ ┣ 📄viterbi.hpp
+ ┃ ┣ 📄results.cpp
+ ┃ ┣ 📄results.hpp
  ┣ 📂data                              // Dataset
  ┃ ┣ 📄dataset.pos
  ┃ ┣ 📄sample.pos
@@ -103,7 +122,7 @@ Use the following commands to
 * Build the code:
 
 ```
-g++ .\main.cpp .\components\data.cpp .\components\viterbi.cpp .\components\tokenize.cpp .\components\results.cpp
+g++ .\main.cpp .\components\data.cpp .\components\tokenize.cpp .\components\viterbi.cpp .\components\results.cpp
 ```
 
 * Run the executable 
