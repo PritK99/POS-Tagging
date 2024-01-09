@@ -97,7 +97,7 @@ Use the following commands to
 * Build the code:
 
 ```
-g++ .\main.cpp .\components\data.cpp .\components\tokenize.cpp .\components\viterbi.cpp
+g++ .\main.cpp .\components\data.cpp .\components\viterbi.cpp .\components\tokenize.cpp .\components\results.cpp
 ```
 
 * Run the executable 

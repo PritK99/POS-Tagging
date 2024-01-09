@@ -30,16 +30,18 @@ public:
     unordered_map<string, int> tag_freq;
     unordered_map <pair<string, string>, int, pair_hash> transition_freq;
     unordered_map <pair<string, string>, int, pair_hash> emission_freq;
-    unordered_map <string, int> prior_freq;
+    unordered_map <pair<string, string>, int, pair_hash> prior_freq;
+    unordered_map <string, int> prior_tag_freq;
     unordered_map <pair<string, string>, double, pair_hash> transition_probs;
     unordered_map <pair<string, string>, double, pair_hash> emission_probs;
-    unordered_map <string, double> prior_probs;
+    unordered_map <pair<string, string>, double, pair_hash> prior_probs;
     unordered_map <string, int> word_to_idx;
     unordered_map <string, int> tag_to_idx;
     unordered_map <int, string> idx_to_word;
     unordered_map <int, string> idx_to_tag;
     vector<vector<double>> dp;
     vector<vector<int>> tags;
+    vector <string> answer;
 
     Dataset()
     {
@@ -51,7 +53,7 @@ public:
     void load_dataset();
     pair<string, string> process_line(string line);
     void create_vocabulary();
-    void create_dictionary();
+    void count_frequencies();
     void calculate_probs();
 };
 

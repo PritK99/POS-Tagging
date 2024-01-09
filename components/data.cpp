@@ -10,9 +10,11 @@
 
 using namespace std;
 
-struct pair_hash {
+struct pair_hash 
+{
     template <typename T1, typename T2>
-    size_t operator()(const std::pair<T1, T2>& p) const {
+    size_t operator()(const std::pair<T1, T2>& p) const 
+    {
         return std::hash<T1>()(p.first) ^ std::hash<T2>()(p.second);
     }
 };
@@ -27,16 +29,18 @@ public:
     unordered_map<string, int> tag_freq;
     unordered_map <pair<string, string>, int, pair_hash> transition_freq;
     unordered_map <pair<string, string>, int, pair_hash> emission_freq;
-    unordered_map <string, int> prior_freq;
+    unordered_map <pair<string, string>, int, pair_hash> prior_freq;
+    unordered_map <string, int> prior_tag_freq;
     unordered_map <pair<string, string>, double, pair_hash> transition_probs;
     unordered_map <pair<string, string>, double, pair_hash> emission_probs;
-    unordered_map <string, double> prior_probs;
+    unordered_map <pair<string, string>, double, pair_hash> prior_probs;
     unordered_map <string, int> word_to_idx;
     unordered_map <string, int> tag_to_idx;
     unordered_map <int, string> idx_to_word;
     unordered_map <int, string> idx_to_tag;
     vector<vector<double>> dp;
     vector<vector<int>> tags;
+    vector <string> answer;
 
     Dataset()
     {
@@ -48,7 +52,7 @@ public:
     void load_dataset();
     pair<string, string> process_line(string line);
     void create_vocabulary();
-    void create_dictionary();
+    void count_frequencies();
     void calculate_probs();
 };
 
@@ -66,6 +70,7 @@ void Dataset::load_dataset()
         cout << "Processing Dataset..." << endl;
         while (getline(dataset, s))
         {
+            // convert vocabulary to lowercase
             for (char &c : s) 
             {
                 c = tolower(c);
@@ -88,6 +93,7 @@ pair<string, string> Dataset::process_line(string line)
 {
     if (line.length() == 0)
     {
+        // adding start tag to represent start of text
         return make_pair("--s--", "--s--");
     }
     string word1, word2;
@@ -110,75 +116,65 @@ void Dataset::create_vocabulary()
 {
     for (auto p : pairs)
     {
+        if (p.first == "--s--")
+        {
+            // do nothing for start tag
+            continue;
+        }
         vocab.insert(p.first);
         POS.insert(p.second);
     }
     
-    // adding unknown tag to represent unknown words
-    POS.insert("UNK");
+    // adding unknown tag to vocab to represent unknown words
     vocab.insert("UNK");
 
     cout << "There are " << vocab.size() << " Unique words in dataset" << endl;
     cout << "There are " << POS.size() << " Unique POS tags in dataset" << endl;
 }
 
-void Dataset::create_dictionary()
+void Dataset::count_frequencies()
 {
+    bool isStart = false;
     for (int i = 0; i < pairs.size()-1; i++)
     {
-        transition_freq[make_pair(pairs[i].first, pairs[i+1].first)] += 1;
-        emission_freq[pairs[i]] += 1;
-        tag_freq[pairs[i].second] += 1;
         if (pairs[i].first == "--s--")
         {
-            prior_freq[pairs[i+1].first] += 1;
+            isStart = true;
+            continue;
+        }
+
+        if (i < pairs.size()-2 && pairs[i+1].first!= "--s--")
+        {
+            transition_freq[make_pair(pairs[i].second, pairs[i+1].second)] += 1;
+        }
+
+        emission_freq[make_pair(pairs[i].second, pairs[i].first)] += 1;
+        tag_freq[pairs[i].second] += 1;
+
+        // increment frequencies for prior tag
+        if (isStart)
+        {
+            prior_freq[make_pair(pairs[i].second, pairs[i].first)] += 1;
+            prior_tag_freq[pairs[i].second] += 1;
+            isStart = false;
         }
     }
 }
 
 void Dataset::calculate_probs()
 {
-    double epsilon = numeric_limits<double>::epsilon();
-
-    for (const auto &tag1 : POS) 
+    for (auto &entry : transition_freq)
     {
-        for (const auto &tag2 : POS)
-        {
-            if (transition_freq.find(make_pair(tag1, tag2)) != transition_freq.end())
-            {
-                transition_probs[make_pair(tag1, tag2)] = log((transition_freq[make_pair(tag1, tag2)] + epsilon)/ (tag_freq[tag1] + vocab.size()*epsilon));
-            }
-            else
-            {
-                transition_probs[make_pair(tag1, tag2)] = log((epsilon)/ (tag_freq[tag1] + vocab.size()*epsilon));
-            }
-        }
+        transition_probs[entry.first] = log(entry.second) - log(tag_freq[entry.first.first]);
     }
 
-    for (const auto &tag : POS) 
+    for (auto &entry : emission_freq)
     {
-        for (const auto &word : vocab)
-        {
-            if (emission_freq.find(make_pair(tag, word)) != emission_freq.end())
-            {
-                emission_probs[make_pair(tag, word)] = log((emission_freq[make_pair(tag, word)] + epsilon)/ (tag_freq[tag] + vocab.size()*epsilon));
-            }
-            else
-            {
-                emission_probs[make_pair(tag, word)] = log((epsilon)/ (tag_freq[tag] + vocab.size()*epsilon));
-            }
-        }
+        emission_probs[entry.first] = log(entry.second) - log(tag_freq[entry.first.first]);
     }
 
-    for (const auto &tag : POS) 
+    for (auto &entry : prior_freq)
     {
-        if (prior_freq.find(tag) != prior_freq.end())
-        {
-            prior_probs[tag] = log((prior_freq[tag] + epsilon)/ (pairs.size() + POS.size()*epsilon));
-        }
-        else
-        {
-            prior_probs[tag] = log((epsilon)/ (pairs.size() + POS.size()*epsilon));
-        }
+        prior_probs[entry.first] = log(entry.second) - log(prior_tag_freq[entry.first.first]);
     }
 }

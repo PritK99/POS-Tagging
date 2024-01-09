@@ -53,3 +53,37 @@ Haag	NNP
 plays	VBZ
 Elianti	NNP
 .	.
+
+Rolls-Royce	NNP
+Motor	NNP
+Cars	NNPS
+Inc.	NNP
+said	VBD
+it	PRP
+expects	VBZ
+its	PRP$
+U.S.	NNP
+sales	NNS
+to	TO
+remain	VB
+steady	JJ
+at	IN
+about	IN
+1,200	CD
+cars	NNS
+in	IN
+1990	CD
+.	.
+
+The	DT
+luxury	NN
+auto	NN
+maker	NN
+last	JJ
+year	NN
+sold	VBD
+1,214	CD
+cars	NNS
+in	IN
+the	DT
+U.S.	NNP
