@@ -43,7 +43,7 @@ unordered_map<string, string> tagDictionary =
         {"vbp", "verb, non-3rd person singular present"},
         {"vbd", "verb, past tense"},
         {"vbn", "verb, past participle"},
-        {"vbg", "gerund or present participle"},
+        {"vbg", "verb, gerund or present participle"},
         {"wdt", "wh-determiner"},
         {"wp", "wh-pronoun, personal"},
         {"wp$", "wh-pronoun, possessive"},

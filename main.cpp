@@ -22,7 +22,7 @@ int main()
     dataset.count_frequencies();
     dataset.calculate_probs();
 
-    string s = "National banks have started giving loans";
+    string s = "I am the president of USA";
     vector<string> words = tokenize(s);
     words = preprocess(words, dataset);
 
