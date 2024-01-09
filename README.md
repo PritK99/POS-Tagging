@@ -1,12 +1,13 @@
 # POS-Tagging
 
+<img src = "assets/POS-Tagging.jpg" alt="POS-Tagging">
+
 ## Table of Contents
 
 - [Project](#POS-Tagging)
   - [Table of Contents](#table-of-contents)
   - [About The Project](#introduction)
   - [Results](#results)
-  - [Demo](#demo)
   - [Documentation](#documentation)
   - [File Structure](#file-structure)
   - [Project Workflow](#project-workflow)
@@ -16,9 +17,7 @@
 
 ## Introduction
 
-<img src = "assets/POS-Tagging.jpg" alt="POS-Tagging">
-
-</b>Part-Of-Speech (POS) tagging<b> is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to. POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. they are ambiguous in nature. Consider the following examples:
+<b>Part-Of-Speech (POS) tagging</b> is the process of assigning a part-of-speech tag (Noun, Verb, Adjective, etc.) to each word in an input text. In other words, the main objective is to identify which grammatical category do each word in given test belong to. POS Tagging is difficult because some words can represent more than one part of speech at different times, i.e. they are ambiguous in nature. Consider the following examples:
 
 The whole team played <b>well</b>. ```adverb```
 
@@ -30,7 +29,7 @@ The <b>well</b> is dry. ```noun```
 
 Tears were beginning to <b>well</b> in her eyes. ```verb```
 
-For all these statements, the same word ```well``` assumes different parts of speech. Hence, we use Hidden Markov Model which is a probabilistic model along with Viterbi Algorithm to assign parts of speech tags.
+For all these statements, the same word ```well``` assumes different parts of speech. Hence, we use <b>Hidden Markov Model</b> which is a probabilistic model along with <b>Viterbi Algorithm</b> to assign parts of speech tags.
 
 ### Domains Explored
 
@@ -46,21 +45,19 @@ Click <a href="https://docs.google.com/document/d/1YzoLxt5N7iMxprt9qRRn5fcecOUyP
 
 ```I have one apple and three oranges```
 
-<img src="/assets/output1.png" alt="/assets/output1">
+<img src="assets/output1.png" alt="/assets/output1">
 
 ### Output 2
 
 ```Who is the president of USA?```
 
-<img src="/assets/output2.png" alt="/assets/output2">
+<img src="assets/output2.png" alt="/assets/output2">
 
 ### Output 3
 
 ```India is my country of residence```
 
-<img src="/assets/output3.png" alt="/assets/output3">
-
-## Demo
+<img src="assets/output3.png" alt="/assets/output3">
 
 ## Documentation
 
@@ -94,12 +91,14 @@ For Documentation, click <a href="/documentation/README.md">here</a> or refer ``
 
 ## Project Workflow
 
+<img src="assets/workflow.png" alt="assests/workflow.png">
+
 ## Getting Started
 
 ### Prerequisites
 To download and use this code, the minimum requirements are:
 
-* [g++](https://gcc.gnu.org/onlinedocs/gcc-3.3.6/gcc/G_002b_002b-and-GCC.html): The GNU C++ compiler, available as part of the GNU Compiler Collection (GCC) or Any C++ Compiler
+* [g++ ](https://gcc.gnu.org/onlinedocs/gcc-3.3.6/gcc/G_002b_002b-and-GCC.html): The GNU C++ compiler, available as part of the GNU Compiler Collection (GCC) or Any C++ Compiler
 * Windows 7 or later (64-bit), Any modern Linux distribution (e.g., Ubuntu, Debian, Fedora, Arch Linux)
 * [Microsoft VS Code](https://code.visualstudio.com/download) or any other IDE 
 
