@@ -57,6 +57,15 @@ unordered_map<string, string> tagDictionary =
         {")", "contextual separator, right paren"}
     };
 
+/*
+* Function Name: print_result
+* Input: 
+  - vector<string> words: A vector of words for which POS tags are printed
+  - Dataset dataset: An instance of the Dataset class containing the predicted POS tags in the 'answer' member variable
+* Output: None
+* Logic: Prints the result of POS tagging for each word in the 'words' vector along with its corresponding predicted POS tag from the 'answer' member variable of the 'dataset' object. Uses the 'tagDictionary' unordered_map for mapping POS tag indices to their actual representations.
+* Example Call: print_result(wordVector, datasetInstance);
+*/
 void print_result(vector<string> words, Dataset dataset)
 {
     cout << endl << "/////////////////" << endl;

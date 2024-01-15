@@ -12,6 +12,15 @@
 
 using namespace std;
 
+/*
+* Function Name: initialization
+* Input: 
+  - vector<string> words: A vector of words representing the input sequence
+  - Dataset &dataset: A reference to the Dataset object that will be initialized with dynamic programming tables and tags
+* Output: None
+* Logic: Initializes the dynamic programming tables and tags for the first word in the input sequence. It assigns indices to POS tags, populates the 'dp' table with logarithmic prior probabilities (or a small epsilon value if not available), and initializes the 'tags' table with indices indicating the most likely previous tag for each current tag.
+* Example Call: initialization(wordVector, datasetInstance);
+*/
 void initialization(vector <string> words, Dataset &dataset)
 {
     double epsilon = numeric_limits<double>::min();
@@ -43,6 +52,15 @@ void initialization(vector <string> words, Dataset &dataset)
     }
 }
 
+/*
+* Function Name: forward_pass
+* Input: 
+  - vector<string> words: A vector of words representing the input sequence
+  - Dataset &dataset: A reference to the Dataset object containing dynamic programming tables and probabilities
+* Output: None
+* Logic: Performs the forward pass of the Viterbi algorithm to calculate the maximum likelihood path for each word in the input sequence. For each column (word) and row (POS tag), it calculates the maximum probability path by considering transition probabilities, emission probabilities, and previous column probabilities. The calculated probabilities and corresponding tag indices are stored in the 'dp' and 'tags' tables, respectively.
+* Example Call: forward_pass(wordVector, datasetInstance);
+*/
 void forward_pass(vector <string> words, Dataset &dataset)
 {
     double epsilon = numeric_limits<double>::min();
@@ -93,6 +111,14 @@ void forward_pass(vector <string> words, Dataset &dataset)
     }
 }
 
+/*
+* Function Name: backward_pass
+* Input: 
+  - Dataset &dataset: A reference to the Dataset object containing dynamic programming tables and tags
+* Output: None
+* Logic: Performs the backward pass of the Viterbi algorithm to reconstruct the most likely sequence of POS tags. It starts from the last column (word) and traces back through the 'tags' table to find the indices of the tags that maximize the overall likelihood. The resulting tag indices are converted to POS tags using the 'idx_to_tag' mapping and stored in the 'answer' member variable of the 'dataset' object.
+* Example Call: backward_pass(datasetInstance);
+*/
 void backward_pass(Dataset &dataset)
 {
     vector <int> answer_idx;
